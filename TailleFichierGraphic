@@ -1,0 +1,67 @@
+package project;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class TailleFichierGraphic {
+
+	Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+
+		JFrame frame = new JFrame("Taille du fichier");
+
+		JLabel label = new JLabel("Ecrire le chemin d'accès du fichier txt", JLabel.CENTER);
+		label.setBounds(0, 50, 500, 20);
+
+		final JTextField textField1 = new JTextField();
+		textField1.setBounds(50, 100, 400, 20);
+
+		JButton btn = new JButton("bouton");
+		btn.setBounds(200, 150, 100, 40);
+
+		final JTextField textField2 = new JTextField();
+		textField2.setBounds(50, 220, 400, 20);
+		textField2.setEditable(false);
+
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField1.getText();
+				String saisie = textField1.getText();
+				
+				File myFile = new File(saisie);
+				
+				if (myFile.exists()) {
+					double octets = myFile.length();
+					textField2.setText("le fichier est égal à "+octets+" octets");
+				} else { 
+					textField2.setText("le fichier n'existe pas");
+				}
+			
+				
+			}
+		});
+
+		frame.add(label);
+		frame.add(btn);
+		frame.add(textField1);
+		frame.add(textField2);
+
+		frame.setSize(500, 500);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setLayout(null);
+
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	}
+
+}
